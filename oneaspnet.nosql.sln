@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F4632B29-FDF0-4A56-AC39-E086CEFE6C20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{7C233FB6-2F42-4D2C-A4BC-4427379D5929}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneAspNet.NoSql.Redis", "src\OneAspNet.NoSql.Redis\OneAspNet.NoSql.Redis.csproj", "{F62F0974-7841-4286-959C-41E28948C7C8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneAspNet.NoSql.Mongo", "src\OneAspNet.NoSql.Mongo\OneAspNet.NoSql.Mongo.csproj", "{05FF0E03-2D59-42D7-9429-335229E83DBE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisSample", "samples\RedisSample\RedisSample.csproj", "{1F5692F6-E17C-49B3-9632-AA6A63273F65}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoSample", "samples\MongoSample\MongoSample.csproj", "{718077C5-FEB8-49B2-8E80-2C226859BFAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F62F0974-7841-4286-959C-41E28948C7C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F62F0974-7841-4286-959C-41E28948C7C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F62F0974-7841-4286-959C-41E28948C7C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F62F0974-7841-4286-959C-41E28948C7C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05FF0E03-2D59-42D7-9429-335229E83DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05FF0E03-2D59-42D7-9429-335229E83DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05FF0E03-2D59-42D7-9429-335229E83DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05FF0E03-2D59-42D7-9429-335229E83DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F5692F6-E17C-49B3-9632-AA6A63273F65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F5692F6-E17C-49B3-9632-AA6A63273F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F5692F6-E17C-49B3-9632-AA6A63273F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F5692F6-E17C-49B3-9632-AA6A63273F65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{718077C5-FEB8-49B2-8E80-2C226859BFAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{718077C5-FEB8-49B2-8E80-2C226859BFAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{718077C5-FEB8-49B2-8E80-2C226859BFAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{718077C5-FEB8-49B2-8E80-2C226859BFAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F62F0974-7841-4286-959C-41E28948C7C8} = {F4632B29-FDF0-4A56-AC39-E086CEFE6C20}
+		{05FF0E03-2D59-42D7-9429-335229E83DBE} = {F4632B29-FDF0-4A56-AC39-E086CEFE6C20}
+		{1F5692F6-E17C-49B3-9632-AA6A63273F65} = {7C233FB6-2F42-4D2C-A4BC-4427379D5929}
+		{718077C5-FEB8-49B2-8E80-2C226859BFAA} = {7C233FB6-2F42-4D2C-A4BC-4427379D5929}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D751FEB-D2AE-4920-AF11-B98BE9A0536F}
+	EndGlobalSection
+EndGlobal
