@@ -1,18 +1,30 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
+using OneAspNet.NoSql.Mongo;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace MongoSample.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private readonly MongoRepository<User> _userMongoRepository;
+        public ValuesController(MongoRepository<User> userMongoRepository)
+        {
+            _userMongoRepository = userMongoRepository;
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            _userMongoRepository.Collection.InsertOne(new User
+            {
+                Email = "bidianqing@qq.com"
+            });
+
+            var userList = _userMongoRepository.Collection.Find(u => true).ToList();
+
             return new string[] { "value1", "value2" };
         }
 
