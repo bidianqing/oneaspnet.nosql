@@ -17,9 +17,9 @@ namespace RedisSample.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            _redisCache.StringSet("name", "bidianqing");
+            _redisCache.Database.StringSet("name", "bidianqing");
 
-            var value = _redisCache.StringGet("name");
+            var value = _redisCache.Database.StringGet("name");
             return new string[] { value };
         }
 
