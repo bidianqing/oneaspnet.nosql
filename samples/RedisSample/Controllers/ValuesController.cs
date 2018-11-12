@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OneAspNet.NoSql.Redis;
+using StackExchange.Redis;
 using System.Collections.Generic;
 
 namespace RedisSample.Controllers
@@ -7,19 +8,19 @@ namespace RedisSample.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        private readonly RedisCache _redisCache;
+        private readonly IDatabase _redis;
         public ValuesController(RedisCache redisCache)
         {
-            _redisCache = redisCache;
+            _redis = redisCache.GetDatabase(0);
         }
 
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            _redisCache.Database.StringSet("name", "bidianqing");
+            _redis.StringSet("name", "bidianqing");
 
-            var value = _redisCache.Database.StringGet("name");
+            var value = _redis.StringGet("name");
             return new string[] { value };
         }
 

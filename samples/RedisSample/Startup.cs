@@ -23,6 +23,7 @@ namespace RedisSample
             services.AddRedis(options =>
             {
                 options.Configuration = Configuration.GetConnectionString("RedisConnectionString");
+                options.DatabaseNumber = 16;
             });
         }
 
