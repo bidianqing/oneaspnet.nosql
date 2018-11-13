@@ -38,7 +38,7 @@ namespace OneAspNet.NoSql.Redis
         }
 
 
-        public IDatabase GetDatabase(int db)
+        public IDatabase GetDatabase(int db = 0)
         {
             if (_databases.TryGetValue(db, out IDatabase database))
             {

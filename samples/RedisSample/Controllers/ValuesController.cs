@@ -11,7 +11,7 @@ namespace RedisSample.Controllers
         private readonly IDatabase _redis;
         public ValuesController(RedisCache redisCache)
         {
-            _redis = redisCache.GetDatabase(0);
+            _redis = redisCache.GetDatabase();
         }
 
         // GET api/values

@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using OneAspNet.NoSql.Redis;
 using System;
 
-namespace OneAspNet.NoSql.Redis
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class RedisServiceCollectionExtensions
     {
