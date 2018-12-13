@@ -2,6 +2,7 @@
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace OneAspNet.NoSql.Redis
 {
@@ -9,7 +10,7 @@ namespace OneAspNet.NoSql.Redis
     {
         private ConnectionMultiplexer _connection;
         private readonly RedisOptions _options;
-        private static object _obj = new object();
+        private readonly SemaphoreSlim _connectionLock = new SemaphoreSlim(initialCount: 1, maxCount: 1);
         private Dictionary<int, IDatabase> _databases = new Dictionary<int, IDatabase>();
         public RedisCache(IOptions<RedisOptions> optionsAccessor)
         {
@@ -20,21 +21,31 @@ namespace OneAspNet.NoSql.Redis
 
             _options = optionsAccessor.Value;
 
-            if (_connection == null)
+            _connectionLock.Wait();
+            try
             {
-                lock (_obj)
+                if (_connection == null)
                 {
-                    if (_connection == null)
+                    if (_options.ConfigurationOptions != null)
+                    {
+                        _connection = ConnectionMultiplexer.Connect(_options.ConfigurationOptions);
+                    }
+                    else
                     {
                         _connection = ConnectionMultiplexer.Connect(_options.Configuration);
+                    }
 
-                        for (int i = 0; i < _options.DatabaseNumber; i++)
-                        {
-                            _databases.Add(i, _connection.GetDatabase(i));
-                        }
+                    for (int i = 0; i < _options.DatabaseNumber; i++)
+                    {
+                        _databases.Add(i, _connection.GetDatabase(i));
                     }
                 }
             }
+            finally
+            {
+                _connectionLock.Release();
+            }
+
         }
 
 
