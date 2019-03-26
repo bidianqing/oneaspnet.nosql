@@ -8,7 +8,7 @@
     <RepositoryUrl>https://github.com/bidianqing/oneaspnet.nosql</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>redis</PackageTags>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
   </PropertyGroup>
 
   <ItemGroup>

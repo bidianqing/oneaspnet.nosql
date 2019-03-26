@@ -3,16 +3,17 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
+using System.Threading;
 
 namespace OneAspNet.NoSql.Mongo
 {
     public class MongoRepository<T>
     {
-        private static IMongoDatabase _mongoDatabase;
+        private readonly IMongoDatabase _mongoDatabase;
         private readonly MongoOptions _options;
-        private static object _obj = new object();
-        private static readonly ConcurrentDictionary<RuntimeTypeHandle, IMongoCollection<T>> _mongoCollections = new ConcurrentDictionary<RuntimeTypeHandle, IMongoCollection<T>>();
-        private static readonly ConcurrentDictionary<RuntimeTypeHandle, string> _collectionNames = new ConcurrentDictionary<RuntimeTypeHandle, string>();
+        private readonly SemaphoreSlim _connectionLock = new SemaphoreSlim(initialCount: 1, maxCount: 1);
+        private readonly ConcurrentDictionary<RuntimeTypeHandle, IMongoCollection<T>> _mongoCollections = new ConcurrentDictionary<RuntimeTypeHandle, IMongoCollection<T>>();
+        private readonly ConcurrentDictionary<RuntimeTypeHandle, string> _collectionNames = new ConcurrentDictionary<RuntimeTypeHandle, string>();
 
         public MongoRepository(IOptions<MongoOptions> optionsAccessor)
         {
@@ -23,17 +24,19 @@ namespace OneAspNet.NoSql.Mongo
 
             _options = optionsAccessor.Value;
 
-            if (_mongoDatabase == null)
+            _connectionLock.Wait();
+            try
             {
-                lock (_obj)
+                if (_mongoDatabase == null)
                 {
-                    if (_mongoDatabase == null)
-                    {
-                        var _databaseName = MongoUrl.Create(_options.ConnectionString).DatabaseName;
+                    var _databaseName = MongoUrl.Create(_options.ConnectionString).DatabaseName;
 
-                        _mongoDatabase = new MongoClient(_options.ConnectionString).GetDatabase(_databaseName);
-                    }
+                    _mongoDatabase = new MongoClient(_options.ConnectionString).GetDatabase(_databaseName);
                 }
+            }
+            finally
+            {
+                _connectionLock.Release();
             }
         }
 

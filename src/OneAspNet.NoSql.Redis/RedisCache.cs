@@ -8,7 +8,7 @@ namespace OneAspNet.NoSql.Redis
 {
     public class RedisCache
     {
-        private ConnectionMultiplexer _connection;
+        private readonly ConnectionMultiplexer _connection;
         private readonly RedisOptions _options;
         private readonly SemaphoreSlim _connectionLock = new SemaphoreSlim(initialCount: 1, maxCount: 1);
         private Dictionary<int, IDatabase> _databases = new Dictionary<int, IDatabase>();
@@ -35,7 +35,7 @@ namespace OneAspNet.NoSql.Redis
                         _connection = ConnectionMultiplexer.Connect(_options.Configuration);
                     }
 
-                    for (int i = 0; i < _options.DatabaseNumber; i++)
+                    for (int i = 0; i < _options.NumOfDatabases; i++)
                     {
                         _databases.Add(i, _connection.GetDatabase(i));
                     }

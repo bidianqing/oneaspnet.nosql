@@ -16,8 +16,8 @@ namespace OneAspNet.NoSql.Redis
         public ConfigurationOptions ConfigurationOptions { get; set; }
 
         /// <summary>
-        /// The database number
+        /// The number of databases,default value is 16
         /// </summary>
-        public int DatabaseNumber { get; set; } = 16;
+        public int NumOfDatabases { get; set; } = 16;
     }
 }
